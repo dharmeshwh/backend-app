@@ -3,34 +3,15 @@ import { getRepository } from "typeorm";
 import { UserProfile } from "../../typeorm/entity/UserProfile";
 import { StatusCodes } from "http-status-codes";
 
-class UserProfileController {
-  async signup(request: Request, response: Response) {
-    try {
-      return response
-        .status(StatusCodes.OK)
-        .send({ status: true, data: "userDetails" });
-    } catch (error: Error | any) {
-      return response
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .send({ status: true, message: error.message });
-    }
-  }
-
-  async login(request: Request, response: Response) {
-    try {
-    } catch (error: Error | any) {
-      return response
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .send({ status: false, message: error.message });
-    }
-  }
-
+class ProfileController {
   async getUserDetails(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const { userId, username } = request[`user`];
+
       const userDetails = await getRepository(UserProfile).findOneOrFail({
         where: {
-          id,
+          id: userId,
+          username,
         },
       });
       return response
@@ -44,4 +25,4 @@ class UserProfileController {
   }
 }
 
-export const userProfileController = new UserProfileController();
+export const profileController = new ProfileController();

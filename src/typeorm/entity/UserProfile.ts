@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  Index,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -24,7 +25,7 @@ export class UserProfile {
   @Column({
     name: "first_name",
     type: "varchar",
-    length: 15,
+    length: 36,
     nullable: false,
   })
   firstname: string;
@@ -32,22 +33,24 @@ export class UserProfile {
   @Column({
     name: "last_name",
     type: "varchar",
-    length: 15,
+    length: 36,
     nullable: false,
   })
   lastName: string;
 
+  @Index({ unique: true })
   @Column({
     name: "user_name",
     type: "varchar",
     length: 36,
     nullable: false,
   })
-  username?: string;
+  username: string;
 
+  @Index({ unique: true })
   @Column({
     name: "email",
-    length: 36,
+    length: 48,
     type: "varchar",
     nullable: false,
   })
@@ -56,6 +59,7 @@ export class UserProfile {
   @Column({
     name: "password",
     type: "varchar",
+    length: 100,
     nullable: false,
     default: false,
   })
