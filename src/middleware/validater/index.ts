@@ -5,8 +5,8 @@ import { StatusCodes } from "http-status-codes";
 const validate = (schema) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const submitData = { ...req.body };
-      await schema.validateAsync(submitData);
+      const validateData = { ...req.body };
+      await schema.validateAsync(validateData);
       next();
     } catch (error: Error | any) {
       return res.status(StatusCodes.BAD_REQUEST).json({

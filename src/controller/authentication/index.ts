@@ -16,7 +16,6 @@ class AuthController {
       user.email = email;
       user.password = password;
       user.username = username;
-      console.log({ user });
 
       const userDetails = await getRepository(UserProfile).save(user);
 
