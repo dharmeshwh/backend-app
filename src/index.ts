@@ -17,10 +17,12 @@ const main = async () => {
 
   const server = http.createServer(app);
 
+  // Start the server
   server.listen(PORT, async () => {
     console.info(`listening on port ${PORT}`);
   });
 
+  // Event handler for server errors
   server.on("error", async (err) => {
     if (err) {
       console.error("Server crashed while listening", err);
@@ -29,6 +31,7 @@ const main = async () => {
     }
   });
 
+  // Event handler for server close
   server.on("close", async () => {
     console.warn("Closing server connection");
     await conn.close();

@@ -8,8 +8,8 @@ import {
 import ormConfig from "./config/ormconfig";
 
 /**
- * Class - Manage database connections
- *
+ * Class - Database Connection Manager
+ * This class manages database connections using TypeORM.
  */
 
 export class Database {
@@ -26,12 +26,15 @@ export class Database {
     let connection: Connection;
     const hasConnection = this.connectionManager.has(CONNECTION_NAME);
     if (hasConnection) {
+      // Connection already exists, reuse it
       connection = this.connectionManager.get(CONNECTION_NAME);
       if (!connection.isConnected) {
+        // If the connection is not connected, establish the connection
         connection = await connection.connect();
       }
       console.info("Connection found");
     } else {
+      // Create a new connection using the provided configuration or the default ormConfig
       connection = await createConnection(this.config || ormConfig);
       console.info("New DB connection made");
     }

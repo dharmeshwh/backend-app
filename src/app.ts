@@ -1,10 +1,12 @@
 import express from "express";
-import apiRoute from "./routes";
+import apiRoutes from "./routes";
 
 const app = express();
 
+// Parse incoming JSON data
 app.use(express.json());
 
-app.use("/", apiRoute);
+// Route handling
+app.use("/", apiRoutes);
 
 export = app;

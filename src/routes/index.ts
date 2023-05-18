@@ -3,10 +3,16 @@ import authenticationRoute from "./authentication";
 import profileRoute from "./profile";
 import { validateRoute } from "../middleware/tokenHandler";
 
-const apiRoute = Router();
+const apiRoutes = Router();
 
-apiRoute.use("/authentication", authenticationRoute);
+/**
+ * Mount the authentication routes under the "/authentication" path
+ */
+apiRoutes.use("/authentication", authenticationRoute);
 
-apiRoute.use("/profile", validateRoute, profileRoute);
+/**
+ * Mount the profile routes under the "/profile" path and apply the "validateRoute" middleware
+ */
+apiRoutes.use("/profile", validateRoute, profileRoute);
 
-export = apiRoute;
+export = apiRoutes;
